@@ -1,0 +1,20 @@
+{
+  "name": "uodiff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compare.js",
+  "bin": {
+    "compare": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "2.1.0",
+    "lodash": "4.17.4",
+    "yargs": "8.0.2"
+  }
+}
