@@ -4,7 +4,18 @@
 const fs = require('fs');
 const _ = require('lodash');
 const chalk = require('chalk');
-const argv = require('yargs').argv;
+const argv = require('yargs')
+  .usage('Usage: $0 fileA fileB')
+  .alias('e', 'exclude')
+  .describe('e', 'regex where if any portion of a matching line matches, that line will be excluded')
+  .help()
+  .argv;
+
+let exclude;
+
+if (typeof argv.e !== 'undefined') {
+  exclude = new RegExp(argv.e);
+}
 
 let fileA = argv._[0];
 let fileB = argv._[1];
@@ -20,8 +31,10 @@ fs.readFile(fileA, 'utf8', (err, data) => {
 
 function parseFile (file, data) {
   let r = [];
-  _.forEach(data.split('\n'), (line, lineNumber)=>{
-    r.push({content: line, line: lineNumber + 1, file}) // offset 0 based index
+  _.forEach(data.split('\n'), (line, lineNumber) => {
+    if (exclude === undefined || !line.match(exclude)) {
+      r.push({content: line, line: lineNumber + 1, file}) // offset 0 based index
+    }
   });
   return r;
 }
