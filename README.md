@@ -1,4 +1,4 @@
-#Unordered diff
+# Unordered diff
 
 Where `diff` compares line by line, `uodiff` checks if a given line is in the other file anywhere.
 
