@@ -5,9 +5,12 @@ const fs = require('fs');
 const _ = require('lodash');
 const chalk = require('chalk');
 const argv = require('yargs')
-  .usage('Usage: $0 fileA fileB')
+  .usage('Usage: $0 fileA fileB [OPTIONS]')
   .alias('e', 'exclude')
   .describe('e', 'regex where if any portion of a matching line matches, that line will be excluded')
+  .alias('w', 'whitespace')
+  .boolean('w')
+  .describe('w', 'trims the line and ignores whitespace before or after a line\'s content')
   .help()
   .argv;
 
@@ -33,6 +36,10 @@ function parseFile (file, data) {
   let r = [];
   _.forEach(data.split('\n'), (line, lineNumber) => {
     if (exclude === undefined || !line.match(exclude)) {
+      if (argv.w){
+        line = line.trim();
+      }
+
       r.push({content: line, line: lineNumber + 1, file}) // offset 0 based index
     }
   });
