@@ -2,6 +2,11 @@
 
 Where `diff` compares line by line, `uodiff` checks if a given line is in the other file anywhere.
 
+## Install
+```
+npm i -g uodiff
+```
+
 ## Usage
 Given two files:
 
@@ -25,10 +30,14 @@ uodiff fileA fileB
 ```
 
 ### Output
+
 3 columns
+```
 #   = linenumber
 -/+ = file indicator
 content of the line
+```
+
 ```
 --- testA
 +++ testB
